@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 
-import Editor from './Editor.js';
+import { Button, Container } from 'semantic-ui-react';
+import Editor  from './Editor.js';
 import './App.css';
 
 export default class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Container>
         <Editor />
-      </div>
+        <Button>
+          Add rect
+        </Button>
+      </Container>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage } from 'react-konva';
+import { Layer, Group, Rect, Stage, Text } from 'react-konva';
 
 import Asset from './Asset';
 
@@ -13,17 +13,29 @@ export default class Editor extends Component {
             width={640}
             height={360}
           />
-          <Rect
-            x={0}
-            y={330}
-            width={640}
-            height={30}
-            fill='green'
-            draggable={true}
-            resizable={true}
-          />
+          <Group draggable={true}>
+            <Rect
+              x={0}
+              y={330}
+              width={640}
+              height={30}
+              fill='green'
+              opacity={0.5}
+            />
+            <Text
+              text='Followers'
+              x={10}
+              y={340}
+              fontSize={16}
+              fill='white'
+              shadowColor='black'
+              shadowEnabled={true}
+              shadowBlur={3}
+            />
+          </Group>
         </Layer>
       </Stage>
+
     );
   }
 }

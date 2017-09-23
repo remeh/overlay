@@ -10,6 +10,7 @@ export default class Asset extends Component {
       src: props.src,
       x: props.x,
       y: props.y,
+      opacity: props.opacity,
       width: props.width,
       height: props.height,
     }
@@ -30,6 +31,7 @@ export default class Asset extends Component {
              image={this.state.image}
              x={this.state.x}
              y={this.state.y}
+             opacity={this.state.opacity}
              width={this.state.width}
              height={this.state.height}
             />
