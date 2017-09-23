@@ -7,7 +7,10 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-konva": "^1.1.4",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "react-semantic": "^0.1.1",
+    "react-semantic-ui": "^0.2.0",
+    "semantic-ui-react": "^0.73.1"
   },
   "scripts": {
     "start": "react-scripts start",
