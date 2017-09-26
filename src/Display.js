@@ -4,6 +4,39 @@ import { Layer, Group, Rect, Stage, Text } from 'react-konva';
 import Asset from './Asset';
 
 export default class Display extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      rects: this.props.rects,
+    };
+  }
+
+  renderRect = (rect) => {
+    return (
+      <Group draggable={true}>
+        <Rect
+          x={rect.x}
+          y={rect.y}
+          width={rect.width}
+          height={rect.height}
+          fill='green'
+          opacity={0.5}
+        />
+        <Text
+          text={rect.text}
+          x={rect.x+10}
+          y={rect.y+10}
+          fontSize={16}
+          fill='white'
+          shadowColor='black'
+          shadowEnabled={true}
+          shadowBlur={3}
+        />
+      </Group>
+    )
+  }
+
   render() {
     return (
       <Stage width={1280} height={720}>
@@ -13,26 +46,9 @@ export default class Display extends Component {
             width={1280}
             height={720}
           />
-          <Group draggable={true}>
-            <Rect
-              x={0}
-              y={690}
-              width={1280}
-              height={30}
-              fill='green'
-              opacity={0.5}
-            />
-            <Text
-              text='Followers'
-              x={10}
-              y={700}
-              fontSize={16}
-              fill='white'
-              shadowColor='black'
-              shadowEnabled={true}
-              shadowBlur={3}
-            />
-          </Group>
+          {this.state.rects.map((rect) => {
+            return this.renderRect(rect)
+          })}
         </Layer>
       </Stage>
 
