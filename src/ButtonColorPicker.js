@@ -28,7 +28,10 @@ export default class ButtonColorPicker extends Component {
   };
 
   handleChange = (color) => {
+    // store the change
     this.setState({ color: color.rgb })
+    // transmit the change
+    this.props.onChange({ color: color.hex, opacity: color.rgb.a });
   };
 
   render() {

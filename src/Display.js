@@ -12,23 +12,30 @@ export default class Display extends Component {
     };
   }
 
-  renderRect = (rect) => {
+  componentWillReceiveProps(nProps) {
+    this.setState({
+      rects: nProps.rects,
+    });
+  }
+
+  renderRect = (rect, idx) => {
+    console.log(rect.bg);
     return (
-      <Group draggable={true}>
+      <Group key={idx} draggable={true}>
         <Rect
           x={rect.x}
           y={rect.y}
           width={rect.width}
           height={rect.height}
-          fill='green'
-          opacity={0.5}
+          fill={rect.bg.color}
+          opacity={rect.bg.opacity}
         />
         <Text
           text={rect.text}
           x={rect.x+10}
           y={rect.y+10}
           fontSize={16}
-          fill='white'
+          fill={rect.fg.color}
           shadowColor='black'
           shadowEnabled={true}
           shadowBlur={3}
@@ -46,8 +53,8 @@ export default class Display extends Component {
             width={1280}
             height={720}
           />
-          {this.state.rects.map((rect) => {
-            return this.renderRect(rect)
+          {this.state.rects.map((rect, idx) => {
+            return this.renderRect(rect, idx)
           })}
         </Layer>
       </Stage>
