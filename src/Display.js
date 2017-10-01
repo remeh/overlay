@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layer, Group, Rect, Stage, Text } from 'react-konva';
+import { Layer, Group, Stage, Text } from 'react-konva';
 
 import Asset from './Asset';
 
@@ -8,34 +8,31 @@ export default class Display extends Component {
     super(props);
 
     this.state = {
-      rects: this.props.rects,
+      texts: this.props.texts,
     };
   }
 
   componentWillReceiveProps(nProps) {
     this.setState({
-      rects: nProps.rects,
+      texts: nProps.texts,
     });
   }
 
-  renderRect = (rect, idx) => {
-    console.log(rect.bg);
+  onTextSelected = (text) => {
+  }
+
+  renderText = (text, idx) => {
     return (
-      <Group key={idx} draggable={true}>
-        <Rect
-          x={rect.x}
-          y={rect.y}
-          width={rect.width}
-          height={rect.height}
-          fill={rect.bg.color}
-          opacity={rect.bg.opacity}
-        />
+      <Group key={'group-' + idx}
+        draggable={true}
+        >
         <Text
-          text={rect.text}
-          x={rect.x+10}
-          y={rect.y+10}
-          fontSize={16}
-          fill={rect.fg.color}
+          onClick={() => { this.onTextSelected(text) }}
+          text={text.text}
+          x={text.x}
+          y={text.y}
+          fontSize={12}
+          fill={text.color.color}
           shadowColor='black'
           shadowEnabled={true}
           shadowBlur={3}
@@ -50,15 +47,14 @@ export default class Display extends Component {
         <Layer>
           <Asset
             src='./shot.jpg'
-            width={1280}
-            height={720}
+            width={896}
+            height={504}
           />
-          {this.state.rects.map((rect, idx) => {
-            return this.renderRect(rect, idx)
+          {this.state.texts.map((text, idx) => {
+            return this.renderText(text, idx)
           })}
         </Layer>
       </Stage>
-
     );
   }
 }

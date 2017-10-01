@@ -9,14 +9,12 @@ export default class TextWidget extends Component {
 
     this.state = {
       text: '',
-      fg: '#ffffff',
-      bg: '#000000',
+      color: '#ffffff',
     }
   }
 
   addText = () => {
-    // TODO(remy): add fg and bg colors.
-    this.props.addText(this.state.text, this.state.fg, this.state.bg);
+    this.props.addText(this.state.text, this.state.color);
   }
 
   changeText = (event, data) => {
@@ -25,15 +23,9 @@ export default class TextWidget extends Component {
     });
   }
 
-  changeFg = (fg) => {
+  changeColor = (color) => {
     this.setState({
-      fg: fg,
-    });
-  }
-
-  changeBg = (bg) => {
-    this.setState({
-      bg: bg,
+      color: color,
     });
   }
 
@@ -43,8 +35,7 @@ export default class TextWidget extends Component {
         <Grid>
           <Grid.Column width={3}>Add a Text</Grid.Column>
           <Grid.Column width={3}><Input onChange={this.changeText} placeholder="text" /></Grid.Column>
-          <Grid.Column width={3}>BG: <ButtonColorPicker onChange={this.changeBg} /></Grid.Column>
-          <Grid.Column width={3}>FG: <ButtonColorPicker onChange={this.changeFg} /></Grid.Column>
+          <Grid.Column width={3}>Color: <ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
           <Grid.Column width={3}><Button onClick={this.addText} >Add</Button></Grid.Column>
         </Grid> 
       </Container>

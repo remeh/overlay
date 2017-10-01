@@ -10,17 +10,13 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      rects: [{
+      texts: [{
         text: 'Hello',
         x: 0,
         y: 330,
         width: 300,
         height: 100,
-        bg: {
-          color: 'green',
-          opacity: 0.3,
-        },
-        fg: {
+        color: {
           color: 'white',
           opacity: 1.0,
         },
@@ -30,11 +26,7 @@ export default class App extends Component {
         y: 300,
         width: 300,
         height: 100,
-        bg: {
-          color: 'red',
-          opacity: 0.3,
-        },
-        fg: {
+        color: {
           color: 'white',
           opacity: 1.0,
         },
@@ -42,31 +34,26 @@ export default class App extends Component {
     };
   }
 
-  addRect = (text, fg, bg) => {
-    console.log('App.addRect:', text);
-    console.log('fg', fg);
-    console.log('bg', bg);
-    let rects = this.state.rects.slice();
-    rects.push({
+  addText = (text, color) => {
+    let texts = this.state.texts.slice();
+    texts.push({
       text: text,
       x: 0, y: 0,
-      width: 300, height: 100,
-      fg: fg,
-      bg: bg,
+      color: color,
     });
     this.setState({
-      rects: rects,
+      texts: texts,
     });
   }
 
   render() {
     return (<div>
       <Container>
-        <Display rects={this.state.rects} />
+        <Display texts={this.state.texts} />
       </Container>
       <Divider />
       <Container>
-        <Editor addRect={this.addRect} />
+        <Editor addText={this.addText} />
       </Container>
     </div>);
   }
