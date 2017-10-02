@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layer, Group, Stage, Text } from 'react-konva';
+import { Layer, Rect, Stage, Text } from 'react-konva';
 
 import Asset from './Asset';
 
@@ -9,35 +9,54 @@ export default class Display extends Component {
 
     this.state = {
       texts: this.props.texts,
+      rects: this.props.rects,
     };
   }
 
   componentWillReceiveProps(nProps) {
     this.setState({
       texts: nProps.texts,
+      rects: nProps.rects,
     });
   }
 
   onTextSelected = (text) => {
   }
 
+  onRectSelected = (rect) => {
+  }
+
   renderText = (text, idx) => {
     return (
-      <Group key={'group-' + idx}
+      <Text
+        key={'text-'+idx}
         draggable={true}
-        >
-        <Text
-          onClick={() => { this.onTextSelected(text) }}
-          text={text.text}
-          x={text.x}
-          y={text.y}
-          fontSize={12}
-          fill={text.color.color}
-          shadowColor='black'
-          shadowEnabled={true}
-          shadowBlur={3}
-        />
-      </Group>
+        onClick={() => { this.onTextSelected(text) }}
+        text={text.text}
+        x={text.x}
+        y={text.y}
+        fontSize={12}
+        fill={text.color.color}
+        shadowColor='black'
+        shadowEnabled={true}
+        shadowBlur={3}
+      />
+    )
+  }
+
+  renderRect = (rect, idx) => {
+    return (
+      <Rect
+        key={'rect-'+idx}
+        draggable={true}
+        onClick={() => { this.onRectSelected(rect) }}
+        x={rect.x}
+        y={rect.y}
+        width={rect.width}
+        height={rect.height}
+        fill={rect.color.color}
+        opacity={rect.color.opacity}
+      />
     )
   }
 
@@ -52,6 +71,9 @@ export default class Display extends Component {
           />
           {this.state.texts.map((text, idx) => {
             return this.renderText(text, idx)
+          })}
+          {this.state.rects.map((rect, idx) => {
+            return this.renderRect(rect, idx)
           })}
         </Layer>
       </Stage>
