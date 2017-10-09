@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import { Layer, Rect, Stage, Text } from 'react-konva';
 
 import Asset from './Asset';
+import Consts from './Consts';
 
 export default class Display extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      texts: this.props.texts,
-      rects: this.props.rects,
+      objects: this.props.objects,
     };
   }
 
   componentWillReceiveProps(nProps) {
     this.setState({
-      texts: nProps.texts,
-      rects: nProps.rects,
+      objects: nProps.objects,
     });
   }
 
@@ -69,11 +68,15 @@ export default class Display extends Component {
             width={896}
             height={504}
           />
-          {this.state.texts.map((text, idx) => {
-            return this.renderText(text, idx)
-          })}
-          {this.state.rects.map((rect, idx) => {
-            return this.renderRect(rect, idx)
+          {this.state.objects.map((object, idx) => {
+            switch (object.type) {
+                case Consts.Rect:
+                  return this.renderRect(object, idx)
+                case Consts.Text:
+                  return this.renderText(object, idx)
+                default:
+            }
+            return () => {};
           })}
         </Layer>
       </Stage>

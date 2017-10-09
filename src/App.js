@@ -4,13 +4,15 @@ import { Container, Divider } from 'semantic-ui-react';
 import Display from './Display.js';
 import Editor from './Editor.js';
 import './App.css';
+import Consts from './Consts.js';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rects: [{
+      objects: [{
+        type: Consts.Rect,
         x: 0,
         y: 0,
         width: 300,
@@ -19,8 +21,8 @@ export default class App extends Component {
           color: 'red',
           opacity: 0.7,
         },
-      }],
-      texts: [{
+      }, {
+        type: Consts.Text,
         text: 'Hello',
         x: 0,
         y: 330,
@@ -30,7 +32,8 @@ export default class App extends Component {
           color: 'white',
           opacity: 1.0,
         },
-      },{
+      }, {
+        type: Consts.Text,
         text: 'Followers',
         x: 0,
         y: 300,
@@ -45,20 +48,22 @@ export default class App extends Component {
   }
 
   addText = (text, color) => {
-    let texts = this.state.texts.slice();
-    texts.push({
+    let objects = this.state.objects.slice();
+    objects.push({
+      type: Consts.Text,
       text: text,
       x: 0, y: 0,
       color: color,
     });
     this.setState({
-      texts: texts,
+      objects: objects,
     });
   }
 
   addRect = (color) => {
-    let rects = this.state.rects.slice();
-    rects.push({
+    let objects = this.state.objects.slice();
+    objects.push({
+      type: Consts.Rect,
       x: 0,
       y: 0,
       width: 300,
@@ -66,14 +71,14 @@ export default class App extends Component {
       color: color,
     });
     this.setState({
-      rects: rects,
+      objects: objects,
     });
   }
 
   render() {
     return (<div>
       <Container>
-        <Display rects={this.state.rects} texts={this.state.texts} />
+        <Display objects={this.state.objects} />
       </Container>
       <Divider />
       <Container>
