@@ -9,12 +9,19 @@ export default class TextWidget extends Component {
 
     this.state = {
       text: '',
+      fontSize: 12,
       color: '#ffffff',
     }
   }
 
   addText = () => {
-    this.props.addText(this.state.text, this.state.color);
+    this.props.addText(this.state.text, this.state.color, this.state.fontSize);
+  }
+
+  changeFontSize = (event, data) => {
+    this.setState({
+      fontSize: data.value,
+    });
   }
 
   changeText = (event, data) => {
@@ -35,7 +42,8 @@ export default class TextWidget extends Component {
         <Grid>
           <Grid.Column width={3}>Add a Text</Grid.Column>
           <Grid.Column width={3}><Input onChange={this.changeText} placeholder="text" /></Grid.Column>
-          <Grid.Column width={3}>Color: <ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
+          <Grid.Column width={2}>Color: <ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
+          <Grid.Column width={1}>FontSize: <Input placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
           <Grid.Column width={3}><Button onClick={this.addText} >Add</Button></Grid.Column>
         </Grid> 
       </Container>

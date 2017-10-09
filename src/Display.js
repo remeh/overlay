@@ -34,7 +34,7 @@ export default class Display extends Component {
         text={text.text}
         x={text.x}
         y={text.y}
-        fontSize={12}
+        fontSize={text.fontSize}
         fill={text.color.color}
         shadowColor='black'
         shadowEnabled={true}

@@ -28,6 +28,7 @@ export default class App extends Component {
         y: 330,
         width: 300,
         height: 100,
+        fontSize: 12,
         color: {
           color: 'white',
           opacity: 1.0,
@@ -39,6 +40,7 @@ export default class App extends Component {
         y: 300,
         width: 300,
         height: 100,
+        fontSize: 12,
         color: {
           color: 'white',
           opacity: 1.0,
@@ -47,11 +49,12 @@ export default class App extends Component {
     };
   }
 
-  addText = (text, color) => {
+  addText = (text, color, fontSize) => {
     let objects = this.state.objects.slice();
     objects.push({
       type: Consts.Text,
       text: text,
+      fontSize: fontSize,
       x: 0, y: 0,
       color: color,
     });
