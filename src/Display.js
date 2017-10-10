@@ -9,13 +9,13 @@ export default class Display extends Component {
     super(props);
 
     this.state = {
-      objects: this.props.objects,
+      zones: this.props.zones,
     };
   }
 
   componentWillReceiveProps(nProps) {
     this.setState({
-      objects: nProps.objects,
+      zones: nProps.zones,
     });
   }
 
@@ -34,6 +34,7 @@ export default class Display extends Component {
         text={text.text}
         x={text.x}
         y={text.y}
+        onDragMove={(event, data) => {this.onDragEnd(event, data, idx) }}
         fontSize={text.fontSize}
         fill={text.color.color}
         shadowColor='black'
@@ -51,6 +52,7 @@ export default class Display extends Component {
         onClick={() => { this.onRectSelected(rect) }}
         x={rect.x}
         y={rect.y}
+        onDragMove={() => {this.onDragEnd(idx) }}
         width={rect.width}
         height={rect.height}
         fill={rect.color.color}
@@ -61,19 +63,19 @@ export default class Display extends Component {
 
   render() {
     return (
-      <Stage width={1280} height={720}>
+      <Stage width={896} height={504}>
         <Layer>
           <Asset
             src='./shot.jpg'
             width={896}
             height={504}
           />
-          {this.state.objects.map((object, idx) => {
-            switch (object.type) {
+          {this.state.zones.map((zone, idx) => {
+            switch (zone.type) {
                 case Consts.Rect:
-                  return this.renderRect(object, idx)
+                  return this.renderRect(zone, idx)
                 case Consts.Text:
-                  return this.renderText(object, idx)
+                  return this.renderText(zone, idx)
                 default:
             }
             return () => {};

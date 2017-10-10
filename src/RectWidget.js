@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Container, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import ButtonColorPicker from './ButtonColorPicker.js';
 
 export default class RectWidget extends Component {
@@ -27,13 +27,16 @@ export default class RectWidget extends Component {
 
   render() {
     return (
-      <Container>
-        <Grid>
-          <Grid.Column width={3}>Add a Rect</Grid.Column>
-          <Grid.Column width={3}>BG: <ButtonColorPicker onChange={this.changeColor} /></Grid.Column>
-          <Grid.Column width={3}><Button onClick={this.addRect} >Add</Button></Grid.Column>
-        </Grid> 
-      </Container>
+      <Grid>
+        <Grid.Row columns={2}>
+          <Grid.Column></Grid.Column>
+          <Grid.Column><strong>Color</strong></Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column><strong>Background</strong></Grid.Column>
+          <Grid.Column><ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

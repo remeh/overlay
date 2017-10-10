@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Container, Input, Grid } from 'semantic-ui-react';
+import { Input, Grid } from 'semantic-ui-react';
 import ButtonColorPicker from './ButtonColorPicker.js';
 
 export default class TextWidget extends Component {
@@ -14,8 +14,8 @@ export default class TextWidget extends Component {
     }
   }
 
-  addText = () => {
-    this.props.addText(this.state.text, this.state.color, this.state.fontSize);
+  setText = () => {
+    this.props.setText(this.state.text, this.state.color, this.state.fontSize);
   }
 
   changeFontSize = (event, data) => {
@@ -28,6 +28,8 @@ export default class TextWidget extends Component {
     this.setState({
       text: data.value,
     });
+
+    this.setText();
   }
 
   changeColor = (color) => {
@@ -38,15 +40,20 @@ export default class TextWidget extends Component {
 
   render() {
     return (
-      <Container>
-        <Grid>
-          <Grid.Column width={3}>Add a Text</Grid.Column>
-          <Grid.Column width={3}><Input onChange={this.changeText} placeholder="text" /></Grid.Column>
-          <Grid.Column width={2}>Color: <ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
-          <Grid.Column width={1}>FontSize: <Input placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
-          <Grid.Column width={3}><Button onClick={this.addText} >Add</Button></Grid.Column>
-        </Grid> 
-      </Container>
+      <Grid>
+        <Grid.Row columns={4}>
+          <Grid.Column></Grid.Column>
+          <Grid.Column><strong>Value</strong></Grid.Column>
+          <Grid.Column><strong>Color</strong></Grid.Column>
+          <Grid.Column><strong>Size</strong></Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={4}>
+          <Grid.Column><strong>Texte</strong></Grid.Column>
+          <Grid.Column><Input onChange={this.setText} placeholder="text" /></Grid.Column>
+          <Grid.Column><ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
+          <Grid.Column><Input placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
