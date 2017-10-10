@@ -27,13 +27,13 @@ export default class Editor extends Component {
     return (
       <Container>
         <h1>Editor</h1>
-        <Dropdown onChange={this.changeDisplayed} defaultValue={this.props.currentZone.key} basic fluid selection options={this.props.zones} />
+        <Dropdown onChange={this.changeDisplayed} defaultValue={this.props.currentZone.value} basic fluid selection options={this.props.dropdown} />
         <Divider hidden />
-        <Checkbox toggle onChange={this.props.toggleActive} checked={this.state.zone.active} label='Active' />
-        <Dimmer.Dimmable blurring dimmed={!this.state.zone.active} as={Segment}>
-          <TextWidget addText={this.props.addText} />
+        <Checkbox toggle onChange={this.props.toggleActive} checked={this.state.zone.config.active} label='Active' />
+        <Dimmer.Dimmable blurring dimmed={!this.state.zone.config.active} as={Segment}>
+          <TextWidget zone={this.state.zone} setText={this.props.setText} />
           <Divider />
-          <RectWidget addRect={this.props.addRect} />
+          <RectWidget zone={this.state.zone} setBg={this.props.setBg} />
         </Dimmer.Dimmable>
       </Container>
     );

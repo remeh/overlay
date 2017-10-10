@@ -19,10 +19,6 @@ export default class TextWidget extends Component {
     }
   }
 
-  setText = () => {
-    this.props.setText(this.state.text, this.state.color, this.state.fontSize);
-  }
-
   changeFontSize = (event, data) => {
     this.setState({
       fontSize: data.value,
@@ -33,8 +29,7 @@ export default class TextWidget extends Component {
     this.setState({
       text: data.value,
     });
-
-    this.setText();
+    this.props.setText(this.state.text, this.state.color, this.state.fontSize);
   }
 
   changeColor = (color) => {

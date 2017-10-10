@@ -17,14 +17,11 @@ export default class RectWidget extends Component {
     }
   }
 
-  addRect = () => {
-    this.props.addRect(this.state.color);
-  }
-
   changeColor = (color) => {
     this.setState({
       color: color,
     });
+    this.props.setBg(this.state.color);
   }
 
   render() {

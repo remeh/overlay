@@ -5,28 +5,64 @@ import Display from './Display.js';
 import Editor from './Editor.js';
 import './App.css';
 
+let dropdownEntries = [
+  {
+    text: 'Left-top corner',
+    key: 'left-top',
+    value: 'left-top',
+  },
+  {
+    text: 'Top',
+    key: 'top',
+    value: 'top',
+  },
+  {
+    text: 'Right-top corner',
+    key: 'right-top',
+    value: 'right-top',
+  },
+]
+
 export default class App extends Component {
   constructor(props) {
     super(props);
 
+    // zones configuration
+
+    const defaultConfig = {
+      active: false,
+      text: {
+        value: '',
+        color: {
+          r: 25,
+          g: 25,
+          b: 25,
+          a: 0.8,
+        },
+        size: '12',
+      },
+      bg: {
+        color: {
+          r: 225,
+          g: 225,
+          b: 225,
+          a: 0.5,
+        },
+      },
+    }
+
     let zones = [
       {
-        text: 'Left-top corner',
-        key: 'left-top',
         value: 'left-top',
-        active: true,
+        config: Object.assign({}, defaultConfig),
       },
       {
-        text: 'Top',
-        key: 'top',
         value: 'top',
-        active: false,
+        config: Object.assign({}, defaultConfig),
       },
       {
-        text: 'Right-top corner',
-        key: 'right-top',
         value: 'right-top',
-        active: true,
+        config: Object.assign({}, defaultConfig),
       },
     ];
 
@@ -41,24 +77,44 @@ export default class App extends Component {
     console.log('setBg', zone, color);
   }
 
-  setText = (zone, color) => {
-    console.log('setText', zone, color);
+  setText = (text, color, size) => {
+    let currentZone = this.state.currentZone;
+    currentZone.config.text.value = text;
+    currentZone.config.text.color = color;
+    currentZone.config.text.size = size;
+    this.updateZoneConfig(currentZone.config);
   }
 
   toggleActive = () => {
     let currentZone = this.state.currentZone;
-    currentZone.active = !currentZone.active;
+    currentZone.config.active = !currentZone.config.active;
+    this.updateZoneConfig(currentZone.config);
+  }
+
+  updateZoneConfig = (config) => {
+    let zones = this.state.zones.slice();
+    for (let idx in this.state.zones) {
+      if (this.state.zones[idx].value === this.state.currentZone.value) {
+        zones[idx].config = config;
+        break;
+      }
+    }
+
+    let currentZone = this.state.currentZone;
+    currentZone.config = config;
     this.setState({
       currentZone: currentZone,
+      zones: zones,
     });
   }
 
   setDisplayed = (zone) => {
     for (let idx in this.state.zones) {
-      if (this.state.zones[idx].key === zone) {
+      if (this.state.zones[idx].value === zone) {
         this.setState({
           currentZone: this.state.zones[idx],
         });
+        break;
       }
     }
   }
@@ -72,7 +128,7 @@ export default class App extends Component {
       <Container>
         <Editor
           currentZone={this.state.currentZone}
-          zones={this.state.zones}
+          dropdown={dropdownEntries}
           setBg={this.setBg}
           setText={this.setText}
           toggleActive={this.toggleActive}
