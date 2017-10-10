@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Container, Divider, Dropdown } from 'semantic-ui-react';
+import { Checkbox, Container, Dimmer, Divider, Dropdown, Segment} from 'semantic-ui-react';
 import RectWidget from './RectWidget.js';
 import TextWidget from './TextWidget.js';
 
@@ -9,30 +9,32 @@ export default class Editor extends Component {
     super(props);
 
     this.state = {
-      zones: [
-        {
-          text: 'Left-top corner',
-          value: 'left-top',
-        },
-        {
-          text: 'Top',
-          value: 'top',
-        },
-        {
-          text: 'Right-top corner',
-          value: 'right-top',
-        },
-      ],
+      zone: this.props.currentZone,
     }
   }
+
+  componentWillReceiveProps(nProps) {
+    this.setState({
+      zone: nProps.currentZone,
+    });
+  }
+
+  changeDisplayed = (event, data) => {
+    this.props.setDisplayed(data.value);
+  }
+
   render() {
     return (
       <Container>
-        <h1>Select the part to edit:</h1>
-        <Dropdown fluid selection options={this.state.zones} />
-        <TextWidget addText={this.props.addText} />
-        <Divider />
-        <RectWidget addRect={this.props.addRect} />
+        <h1>Editor</h1>
+        <Dropdown onChange={this.changeDisplayed} defaultValue={this.props.currentZone.key} basic fluid selection options={this.props.zones} />
+        <Divider hidden />
+        <Checkbox toggle onChange={this.props.toggleActive} checked={this.state.zone.active} label='Active' />
+        <Dimmer.Dimmable blurring dimmed={!this.state.zone.active} as={Segment}>
+          <TextWidget addText={this.props.addText} />
+          <Divider />
+          <RectWidget addRect={this.props.addRect} />
+        </Dimmer.Dimmable>
       </Container>
     );
   }

@@ -9,8 +9,10 @@ export default class RectWidget extends Component {
 
     this.state = {
       color: {
-        color: '#000000',
-        opacity: 0.5,
+        r: 225,
+        g: 225,
+        b: 225,
+        a: 0.5,
       }
     }
   }

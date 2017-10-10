@@ -10,7 +10,12 @@ export default class TextWidget extends Component {
     this.state = {
       text: '',
       fontSize: 12,
-      color: '#ffffff',
+      color: {
+        r: 25,
+        g: 25,
+        b: 25,
+        a: 0.8,
+      }
     }
   }
 
@@ -48,10 +53,10 @@ export default class TextWidget extends Component {
           <Grid.Column><strong>Size</strong></Grid.Column>
         </Grid.Row>
         <Grid.Row columns={4}>
-          <Grid.Column><strong>Texte</strong></Grid.Column>
+          <Grid.Column><strong>Text</strong></Grid.Column>
           <Grid.Column><Input onChange={this.setText} placeholder="text" /></Grid.Column>
           <Grid.Column><ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
-          <Grid.Column><Input placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
+          <Grid.Column><Input value={this.state.fontSize} placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
         </Grid.Row>
       </Grid>
     );
