@@ -13,36 +13,36 @@ export default class Display extends Component {
   }
 
   componentWillReceiveProps(nProps) {
-    this.setState({
-      zones: nProps.zones,
-    });
+    this.setState({ zones: nProps.zones });
   }
 
   renderText = (zone, idx) => {
-    console.log(zone);
+    let color = 'rgba('+zone.config.text.color.rgb.r+','+zone.config.text.color.rgb.g+','+zone.config.text.color.rgb.b+','+zone.config.text.color.rgb.a+')';
     return (
       <Text
         key={'text-'+idx}
         draggable={false}
         text={zone.config.text.value}
-        x={zone.x}
-        y={zone.y}
+        x={zone.x+4}
+        y={zone.y+4}
         fontSize={zone.config.text.size}
-        fill={zone.config.text.color}
+        fill={color}
+        opacity={zone.config.text.color.rgb.a}
       />
     )
   }
 
   renderBg = (zone, idx) => {
+    let color = 'rgba('+zone.config.bg.color.rgb.r+','+zone.config.bg.color.rgb.g+','+zone.config.bg.color.rgb.b+','+zone.config.bg.color.rgb.a+')';
     return (
       <Rect
         key={'bg-'+idx}
         draggable={false}
-        x={zone.x}
-        y={zone.y}
+        x={zone.x+4}
+        y={zone.y+4}
         width={zone.width}
         height={zone.height}
-        fill={zone.config.bg.color}
+        fill={color}
         opacity={zone.config.bg.color.rgb.a}
       />
     )

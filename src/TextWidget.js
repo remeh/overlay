@@ -22,22 +22,18 @@ export default class TextWidget extends Component {
   }
 
   changeFontSize = (event, data) => {
-    this.setState({
-      fontSize: data.value,
-    });
+    this.setState({ fontSize: data.value });
+    this.props.setText(this.state.text, this.state.color, data.value);
   }
 
   changeText = (event, data) => {
-    this.setState({
-      text: data.value,
-    });
-    this.props.setText(this.state.text, this.state.color, this.state.fontSize);
+    this.setState({ text: data.value });
+    this.props.setText(data.value, this.state.color, this.state.fontSize);
   }
 
   changeColor = (color) => {
-    this.setState({
-      color: color,
-    });
+    this.setState({ color: color });
+    this.props.setText(this.state.text, color, this.state.fontSize);
   }
 
   render() {
@@ -51,7 +47,7 @@ export default class TextWidget extends Component {
         </Grid.Row>
         <Grid.Row columns={4}>
           <Grid.Column><strong>Text</strong></Grid.Column>
-          <Grid.Column><Input onChange={this.setText} placeholder="text" /></Grid.Column>
+          <Grid.Column><Input onChange={this.changeText} placeholder="text" /></Grid.Column>
           <Grid.Column><ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
           <Grid.Column><Input value={this.state.fontSize} placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
         </Grid.Row>

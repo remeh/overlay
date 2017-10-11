@@ -41,7 +41,7 @@ export default class App extends Component {
             a: 0.8,
           },
         },
-        size: '12',
+        size: '20',
       },
       bg: {
         color: {
@@ -60,19 +60,19 @@ export default class App extends Component {
         value: 'left-top',
         config: Object.assign({}, defaultConfig),
         x:0, y: 0,
-        width: 400, height: 30,
+        width: 400, height: 32,
       },
       {
         value: 'top',
         config: Object.assign({}, defaultConfig),
         x: 400, y: 0,
-        width: 480, height: 30,
+        width: 480, height: 32,
       },
       {
         value: 'right-top',
         config: Object.assign({}, defaultConfig),
         x: 880, y: 0,
-        width: 400, height: 30,
+        width: 400, height: 32,
       },
     ];
 

@@ -14,9 +14,7 @@ export default class Editor extends Component {
   }
 
   componentWillReceiveProps(nProps) {
-    this.setState({
-      zone: nProps.currentZone,
-    });
+    this.setState({ zone: nProps.currentZone });
   }
 
   changeDisplayed = (event, data) => {
