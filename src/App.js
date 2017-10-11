@@ -34,19 +34,23 @@ export default class App extends Component {
       text: {
         value: '',
         color: {
-          r: 25,
-          g: 25,
-          b: 25,
-          a: 0.8,
+          rgb: {
+            r: 25,
+            g: 25,
+            b: 25,
+            a: 0.8,
+          },
         },
         size: '12',
       },
       bg: {
         color: {
-          r: 225,
-          g: 225,
-          b: 225,
-          a: 0.5,
+          rgb: {
+            r: 225,
+            g: 225,
+            b: 225,
+            a: 0.5,
+          },
         },
       },
     }
@@ -55,14 +59,20 @@ export default class App extends Component {
       {
         value: 'left-top',
         config: Object.assign({}, defaultConfig),
+        x:0, y: 0,
+        width: 400, height: 30,
       },
       {
         value: 'top',
         config: Object.assign({}, defaultConfig),
+        x: 400, y: 0,
+        width: 480, height: 30,
       },
       {
         value: 'right-top',
         config: Object.assign({}, defaultConfig),
+        x: 880, y: 0,
+        width: 400, height: 30,
       },
     ];
 
@@ -73,8 +83,10 @@ export default class App extends Component {
     };
   }
 
-  setBg = (zone, color) => {
-    console.log('setBg', zone, color);
+  setBg = (color) => {
+    let currentZone = this.state.currentZone;
+    currentZone.config.bg.color = color;
+    this.updateZoneConfig(currentZone.config);
   }
 
   setText = (text, color, size) => {

@@ -7,13 +7,10 @@ export default class RectWidget extends Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props);
+
     this.state = {
-      color: {
-        r: 225,
-        g: 225,
-        b: 225,
-        a: 0.5,
-      }
+      color: this.props.zone.config.bg.color,
     }
   }
 
@@ -21,6 +18,7 @@ export default class RectWidget extends Component {
     this.setState({
       color: color,
     });
+    console.log(color);
     this.props.setBg(this.state.color);
   }
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage, Text } from 'react-konva';
+import { Group, Layer, Rect, Stage, Text } from 'react-konva';
 
 import Asset from './Asset';
-import Consts from './Consts';
 
 export default class Display extends Component {
   constructor(props) {
@@ -19,67 +18,60 @@ export default class Display extends Component {
     });
   }
 
-  onTextSelected = (text) => {
-  }
-
-  onRectSelected = (rect) => {
-  }
-
-  renderText = (text, idx) => {
+  renderText = (zone, idx) => {
+    console.log(zone);
     return (
       <Text
         key={'text-'+idx}
-        draggable={true}
-        onClick={() => { this.onTextSelected(text) }}
-        text={text.text}
-        x={text.x}
-        y={text.y}
-        onDragMove={(event, data) => {this.onDragEnd(event, data, idx) }}
-        fontSize={text.fontSize}
-        fill={text.color.color}
-        shadowColor='black'
-        shadowEnabled={true}
-        shadowBlur={3}
+        draggable={false}
+        text={zone.config.text.value}
+        x={zone.x}
+        y={zone.y}
+        fontSize={zone.config.text.size}
+        fill={zone.config.text.color}
       />
     )
   }
 
-  renderRect = (rect, idx) => {
+  renderBg = (zone, idx) => {
     return (
       <Rect
-        key={'rect-'+idx}
-        draggable={true}
-        onClick={() => { this.onRectSelected(rect) }}
-        x={rect.x}
-        y={rect.y}
-        onDragMove={() => {this.onDragEnd(idx) }}
-        width={rect.width}
-        height={rect.height}
-        fill={rect.color.color}
-        opacity={rect.color.opacity}
+        key={'bg-'+idx}
+        draggable={false}
+        x={zone.x}
+        y={zone.y}
+        width={zone.width}
+        height={zone.height}
+        fill={zone.config.bg.color}
+        opacity={zone.config.bg.color.rgb.a}
       />
     )
   }
+
+  renderZone = (zone, idx) => {
+    if (!zone.config.active) {
+      return;
+    }
+
+    console.log('render zone:', zone.value);
+
+    let group = <Group key={zone.value}>
+      {this.renderBg(zone, idx)}
+      {this.renderText(zone, idx)}
+    </Group>;
+    return group;
+ }
 
   render() {
     return (
-      <Stage width={896} height={504}>
+      <Stage width={1280} height={720}>
         <Layer>
           <Asset
             src='./shot.jpg'
-            width={896}
-            height={504}
+            width={1280}
+            height={720}
           />
-          {this.state.zones.map((zone, idx) => {
-            switch (zone.type) {
-                case Consts.Rect:
-                  return this.renderRect(zone, idx)
-                case Consts.Text:
-                  return this.renderText(zone, idx)
-                default:
-            }
-            return () => {};
-          })}
+          {this.state.zones.map((zone, idx) => this.renderZone(zone, idx))}
         </Layer>
       </Stage>
     );

@@ -8,13 +8,15 @@ export default class TextWidget extends Component {
     super(props);
 
     this.state = {
-      text: '',
+      text: 'Hello',
       fontSize: 12,
       color: {
-        r: 25,
-        g: 25,
-        b: 25,
-        a: 0.8,
+        rgb: {
+          r: 25,
+          g: 25,
+          b: 25,
+          a: 0.8,
+        },
       }
     }
   }

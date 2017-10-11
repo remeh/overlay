@@ -24,9 +24,9 @@ export default class ButtonColorPicker extends Component {
 
   handleChange = (color) => {
     // store the change
-    this.setState({ color: color.rgb })
+    this.setState({ color: color })
     // transmit the change
-    this.props.onChange({ color: color.hex, opacity: color.rgb.a });
+    this.props.onChange({ color: color });
   };
 
   render() {
@@ -36,7 +36,7 @@ export default class ButtonColorPicker extends Component {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+          background: `rgba(${ this.state.color.rgb.r }, ${ this.state.color.rgb.g }, ${ this.state.color.rgb.b }, ${ this.state.color.rgb.a })`,
         },
         swatch: {
           padding: '5px',
