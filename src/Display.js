@@ -26,6 +26,7 @@ export default class Display extends Component {
         x={zone.x+4}
         y={zone.y+4}
         fontSize={zone.config.text.size}
+        fontVariant={zone.config.text.bold ? 'bold' : ''}
         fill={color}
         opacity={zone.config.text.color.rgb.a}
       />
@@ -38,8 +39,8 @@ export default class Display extends Component {
       <Rect
         key={'bg-'+idx}
         draggable={false}
-        x={zone.x+4}
-        y={zone.y+4}
+        x={zone.x}
+        y={zone.y}
         width={zone.width}
         height={zone.height}
         fill={color}

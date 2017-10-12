@@ -41,6 +41,7 @@ export default class App extends Component {
             a: 0.8,
           },
         },
+        bold: true,
         size: '20',
       },
       bg: {
@@ -89,10 +90,11 @@ export default class App extends Component {
     this.updateZoneConfig(currentZone.config);
   }
 
-  setText = (text, color, size) => {
+  setText = (text, color, bold, size) => {
     let currentZone = this.state.currentZone;
     currentZone.config.text.value = text;
     currentZone.config.text.color = color;
+    currentZone.config.text.bold = bold;
     currentZone.config.text.size = size;
     this.updateZoneConfig(currentZone.config);
   }
