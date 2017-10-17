@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Container, Divider } from 'semantic-ui-react';
 import Display from './Display.js';
 import Editor from './Editor.js';
+import cloneDeep from 'lodash.clonedeep';
 import './App.css';
 
 let dropdownEntries = [
@@ -59,19 +60,19 @@ export default class App extends Component {
     let zones = [
       {
         value: 'left-top',
-        config: Object.assign({}, defaultConfig),
+        config: cloneDeep(defaultConfig),
         x:0, y: 0,
         width: 400, height: 32,
       },
       {
         value: 'top',
-        config: Object.assign({}, defaultConfig),
+        config: cloneDeep(defaultConfig),
         x: 400, y: 0,
         width: 480, height: 32,
       },
       {
         value: 'right-top',
-        config: Object.assign({}, defaultConfig),
+        config: cloneDeep(defaultConfig),
         x: 880, y: 0,
         width: 400, height: 32,
       },

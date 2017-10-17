@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "konva": "^1.6.8",
+    "lodash.clonedeep": "^4.5.0",
     "react": "^15.6.1",
     "react-color": "^2.13.8",
     "react-dom": "^15.6.1",

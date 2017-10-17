@@ -12,6 +12,12 @@ export default class RectWidget extends Component {
     }
   }
 
+  componentWillReceiveProps(nProps) {
+    this.setState({
+      color: nProps.zone.config.color,
+    });
+  }
+
   changeColor = (color) => {
     this.setState({
       color: color,

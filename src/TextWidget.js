@@ -15,6 +15,15 @@ export default class TextWidget extends Component {
     }
   }
 
+  componentWillReceiveProps(nProps) {
+    this.setState({
+      text: nProps.zone.config.text.value,
+      fontSize: nProps.zone.config.text.size,
+      bold: nProps.zone.config.text.bold,
+      color: nProps.zone.config.text.color,
+    });
+  }
+
   changeFontSize = (event, data) => {
     this.setState({ fontSize: data.value });
     this.props.setText(this.state.text, this.state.color, this.state.bold, data.value);
