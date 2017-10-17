@@ -58,7 +58,7 @@ export default class TextWidget extends Component {
         </Grid.Row>
         <Grid.Row columns={5}>
           <Grid.Column><strong>Text</strong></Grid.Column>
-          <Grid.Column><Input onChange={this.changeText} placeholder="text" /></Grid.Column>
+          <Grid.Column><Input value={this.state.text}  onChange={this.changeText} placeholder="text" /></Grid.Column>
           <Grid.Column><ButtonColorPicker color={this.state.color} onChange={this.changeColor} /></Grid.Column>
           <Grid.Column><Input value={this.state.fontSize} placeholder="12" onChange={this.changeFontSize} /></Grid.Column>
           <Grid.Column><Checkbox toggle checked={this.state.bold} onChange={this.changeBold} /></Grid.Column>
