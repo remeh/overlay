@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import reactCSS from 'reactcss'
 
-import { SketchPicker } from 'react-color'
+import { ChromePicker } from 'react-color'
 
 export default class ButtonColorPicker extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ export default class ButtonColorPicker extends Component {
         </div>
         { this.state.displayColorPicker ? <div style={ styles.popover }>
         <div style={ styles.cover } onClick={ this.handleClose }/>
-        <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+        <ChromePicker color={ this.state.color } onChange={ this.handleChange } />
         </div> : null }
       </div>
     )
