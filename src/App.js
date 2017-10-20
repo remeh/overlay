@@ -55,6 +55,17 @@ export default class App extends Component {
           },
         },
       },
+      icon: {
+        color: {
+          rgb: {
+            r: 225,
+            g: 225,
+            b: 225,
+            a: 0.5,
+          },
+        },
+        icon: '',
+      },
     }
 
     let zones = [
@@ -97,6 +108,13 @@ export default class App extends Component {
     currentZone.config.text.color = color;
     currentZone.config.text.bold = bold;
     currentZone.config.text.size = size;
+    this.updateZoneConfig(currentZone.config);
+  }
+
+  setIcon = (icon, color) => {
+    let currentZone = this.state.currentZone;
+    currentZone.config.icon.icon = icon;
+    currentZone.config.icon.color = color;
     this.updateZoneConfig(currentZone.config);
   }
 
@@ -146,6 +164,7 @@ export default class App extends Component {
           dropdown={dropdownEntries}
           setBg={this.setBg}
           setText={this.setText}
+          setIcon={this.setIcon}
           toggleActive={this.toggleActive}
           setDisplayed={this.setDisplayed}
         />

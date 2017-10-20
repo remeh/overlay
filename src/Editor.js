@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Checkbox, Container, Dimmer, Divider, Dropdown, Segment} from 'semantic-ui-react';
+import IconWidget from './IconWidget.js';
 import RectWidget from './RectWidget.js';
 import TextWidget from './TextWidget.js';
 
@@ -32,6 +33,8 @@ export default class Editor extends Component {
           <TextWidget zone={this.state.zone} setText={this.props.setText} />
           <Divider />
           <RectWidget zone={this.state.zone} setBg={this.props.setBg} />
+          <Divider />
+          <IconWidget zone={this.state.zone} setIcon={this.props.setIcon} />
         </Dimmer.Dimmable>
       </Container>
     );
